@@ -16,16 +16,27 @@ public class MainMenu : MonoBehaviour
     public GameObject noQuit;
     public GameObject back;
     public Text quitConfirm;
-    static public int acquisitionCount = 0;
-    static public int extinctionCount = 0;
+    static public bool tutorial;
+    static public bool g1;
+    static public bool g2;
+    static public bool g3;
+    static public bool g4;
+    static public int acquisitionCount;
+    static public int extinctionCount;
     static public int[] acqMapOrder = { 2, 3, 4 };
     static public int[] extMapOrder = { 5, 6, 7 };
 
     // Use this for initialization
     void Start ()
     {
+        acquisitionCount = 0;
+        extinctionCount = 0;
         Shuffle(acqMapOrder);
         Shuffle(extMapOrder);
+        g1 = false;
+        g2 = false;
+        g3 = false;
+        g4 = false;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         testLevel.SetActive(false);
@@ -68,17 +79,32 @@ public class MainMenu : MonoBehaviour
 
     public void LoadTest()
     {
+        tutorial = true;
         SceneManager.LoadScene(1);
     }
 
-    public void LoadAcquisition()
+    public void LoadGroup1()
     {
-        SceneManager.LoadScene(2);
+        g1 = true;
+        SceneManager.LoadScene(acqMapOrder[acquisitionCount]);
     }
 
-    public void LoadExtinction()
+    public void LoadGroup2()
     {
-        SceneManager.LoadScene(3);
+        g2 = true;
+        SceneManager.LoadScene(acqMapOrder[acquisitionCount]);
+    }
+
+    public void LoadGroup3()
+    {
+        g3 = true;
+        SceneManager.LoadScene(acqMapOrder[acquisitionCount]);
+    }
+
+    public void LoadGroup4()
+    {
+        g4 = true;
+        SceneManager.LoadScene(acqMapOrder[acquisitionCount]);
     }
 
     public void Quit()

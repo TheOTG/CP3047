@@ -31,7 +31,7 @@ public class ProgressBar : MonoBehaviour
 
     void IncProgress()
     {
-        cur_Progress += 1f;
+        cur_Progress += 10f;
         setProgress(cur_Progress / max_Progress);
     }
 

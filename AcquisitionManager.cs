@@ -30,10 +30,12 @@ public class AcquisitionManager : MonoBehaviour
     public Text paused;
     public GameObject mainMenu;
     public bool pause;
+    public GameObject next;
 
     // Use this for initialization
     void Start()
     {
+        MainMenu.acquisitionCount++;
         Time.timeScale = 1f;
         time.enabled = false;
         InvokeRepeating("IncTime", 1f, 1f);
@@ -79,9 +81,10 @@ public class AcquisitionManager : MonoBehaviour
         if (objectiveCount == 3)
         {
             cursor.SetActive(false);
+            controller.enabled = false;
             CancelInvoke("IncTime");
             Time.timeScale = 0f;
-            mainMenu.SetActive(true);
+            next.SetActive(true);
             gameOver.enabled = true;
             time.text = "Time Taken: " + timeTaken + "s";
             time.enabled = true;
@@ -125,6 +128,17 @@ public class AcquisitionManager : MonoBehaviour
         resumeBtn.SetActive(false);
         quit.SetActive(false);
         paused.enabled = false;
+    }
+
+    public void LoadNext()
+    {
+        if (MainMenu.acquisitionCount < 3)
+        {
+            SceneManager.LoadScene(MainMenu.acqMapOrder[MainMenu.acquisitionCount]);
+        } else
+        {
+            SceneManager.LoadScene(MainMenu.extMapOrder[MainMenu.extinctionCount]);
+        }
     }
 
     public void Quit()

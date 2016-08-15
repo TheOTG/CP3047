@@ -38,10 +38,14 @@ public class ExtinctionManager : MonoBehaviour
     public bool pause;
     public Text paused;
     public GameObject mainMenu;
+    public GameObject next;
 
     // Use this for initialization
     void Start ()
     {
+        Vector3 trayPos = new Vector3(Random.Range(15.0f, 22.0f), 3.24f, Random.Range(11.0f, 13.0f));
+        obj1.transform.position = trayPos;
+        MainMenu.extinctionCount++;
         Time.timeScale = 1f;
         InvokeRepeating("IncTime", 1f, 1f);
         time.enabled = false;
@@ -62,6 +66,7 @@ public class ExtinctionManager : MonoBehaviour
         resumeBtn.SetActive(false);
         quit.SetActive(false);
         mainMenu.SetActive(false);
+        next.SetActive(false);
         Time.timeScale = 1f;
     }
 	
@@ -100,13 +105,19 @@ public class ExtinctionManager : MonoBehaviour
         }
         objectiveText.text = "Tasks Cleared: " + objectiveCount + "/5";
         
-        if(objectiveCount == 5)
+        if (objectiveCount == 5)
         {
             cursor.SetActive(false);
             controller.enabled = false;
             CancelInvoke("IncTime");
             Time.timeScale = 0f;
-            mainMenu.SetActive(true);
+            if(MainMenu.extinctionCount == 3)
+            {
+                mainMenu.SetActive(true);
+            } else
+            {
+                next.SetActive(true);
+            }
             gameOver.enabled = true;
             time.text = "Time Taken: " + timeTaken + "s";
             time.enabled = true;
@@ -149,6 +160,14 @@ public class ExtinctionManager : MonoBehaviour
         resumeBtn.SetActive(false);
         quit.SetActive(false);
         paused.enabled = false;
+    }
+
+    public void LoadNext()
+    {
+        if(MainMenu.extinctionCount < 3)
+        {
+            SceneManager.LoadScene(MainMenu.extMapOrder[MainMenu.extinctionCount]);
+        }
     }
 
     public void Quit()

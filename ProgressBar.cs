@@ -9,6 +9,7 @@ public class ProgressBar : MonoBehaviour
     public float max_Progress = 100f;
     public float cur_Progress = 0f;
     public bool inRange;
+    public bool test;
     public GameObject bar;
 
     // Use this for initialization

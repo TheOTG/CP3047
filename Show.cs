@@ -4,7 +4,6 @@ using System.Collections;
 public class Show : MonoBehaviour {
 
     public bool inRange;
-    public bool test;
     public GameObject snake;
 
     // Use this for initialization
@@ -21,7 +20,7 @@ public class Show : MonoBehaviour {
     {
         if (target.tag == "Vision")
         {
-            test = true;
+            inRange = true;
             snake.SetActive(true);
         }
     }

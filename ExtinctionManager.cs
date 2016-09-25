@@ -32,7 +32,7 @@ public class ExtinctionManager : MonoBehaviour
     public bool obj5Cleared;
     public Toggle toggle5;
     public Text gameOver;
-    public FirstPersonController controller;
+    public OVRPlayerController controller;
     public GameObject resumeBtn;
     public GameObject quit;
     public bool pause;
@@ -43,9 +43,22 @@ public class ExtinctionManager : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        Vector3 trayPos = new Vector3(Random.Range(15.0f, 22.0f), 3.24f, Random.Range(11.0f, 13.0f));
-        obj1.transform.position = trayPos;
-        MainMenu.extinctionCount++;
+        if (MainMenu.g1)
+        {
+            MainMenu.g1Count++;
+        }
+        if (MainMenu.g2)
+        {
+            MainMenu.g2Count++;
+        }
+        if (MainMenu.g3)
+        {
+            MainMenu.g3Count++;
+        }
+        if (MainMenu.g4)
+        {
+            MainMenu.g4Count++;
+        }
         Time.timeScale = 1f;
         InvokeRepeating("IncTime", 1f, 1f);
         time.enabled = false;
@@ -111,13 +124,8 @@ public class ExtinctionManager : MonoBehaviour
             controller.enabled = false;
             CancelInvoke("IncTime");
             Time.timeScale = 0f;
-            if(MainMenu.extinctionCount == 3)
-            {
-                mainMenu.SetActive(true);
-            } else
-            {
-                next.SetActive(true);
-            }
+            mainMenu.SetActive(true);
+            next.SetActive(true);
             gameOver.enabled = true;
             time.text = "Time Taken: " + timeTaken + "s";
             time.enabled = true;
@@ -164,9 +172,37 @@ public class ExtinctionManager : MonoBehaviour
 
     public void LoadNext()
     {
-        if(MainMenu.extinctionCount < 3)
+        if (MainMenu.g1)
         {
-            SceneManager.LoadScene(MainMenu.extMapOrder[MainMenu.extinctionCount]);
+            if (MainMenu.g1Count == 14)
+            {
+                SceneManager.LoadScene(0);
+            }
+            SceneManager.LoadScene(MainMenu.g1MapOrder[MainMenu.g1Count]);
+        }
+        else if (MainMenu.g2)
+        {
+            if (MainMenu.g2Count == 13)
+            {
+                SceneManager.LoadScene(0);
+            }
+            SceneManager.LoadScene(MainMenu.g2MapOrder[MainMenu.g2Count]);
+        }
+        else if (MainMenu.g3)
+        {
+            if (MainMenu.g3Count == 13)
+            {
+                SceneManager.LoadScene(0);
+            }
+            SceneManager.LoadScene(MainMenu.g3MapOrder[MainMenu.g3Count]);
+        }
+        else if (MainMenu.g4)
+        {
+            if (MainMenu.g4Count == 13)
+            {
+                SceneManager.LoadScene(0);
+            }
+            SceneManager.LoadScene(MainMenu.g1MapOrder[MainMenu.g4Count]);
         }
     }
 

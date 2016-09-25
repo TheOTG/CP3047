@@ -22,6 +22,10 @@ public class Tutorial : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
+        manager.objectiveText.enabled = false;
+        manager.toggle1.gameObject.SetActive(false);
+        manager.toggle2.gameObject.SetActive(false);
+        manager.toggle3.gameObject.SetActive(false);
         Time.timeScale = 0f;
         tutorial.enabled = true;
         pressAny.enabled = true;
@@ -71,6 +75,7 @@ public class Tutorial : MonoBehaviour
         {
             tutorial.text = "Now try to finish the rest of the tasks.";
             pressAny.enabled = false;
+            
             if (!tut5)
             {
                 StartCoroutine(Tut5Start());
@@ -81,6 +86,10 @@ public class Tutorial : MonoBehaviour
             StopCoroutine(Tut5Start());
             tut5b = true;
             tutorial.enabled = false;
+            manager.objectiveText.enabled = true;
+            manager.toggle1.gameObject.SetActive(true);
+            manager.toggle2.gameObject.SetActive(true);
+            manager.toggle3.gameObject.SetActive(true);
         }
         if (manager.objectiveCount == 2 && !tut6)
         {
